@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Etch-a-sketch</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div class="heading">
+        <h1>Simple etch-a-sketch</h1><br>
+        <h2>Choose a color</h2>
+        <div class="color">
+            <button class="btn-cyan">Cyan</button>
+            <button class="btn-brown">Brown</button>
+            <button class="btn-orange">Orange</button>
+        </div>
+    </div>
+
+    <div id="container"></div>
+    <!-- Javascript code  -->
+    <script>
+        createdivs(16, 16);
+
+        let allbtn = document.querySelectorAll('button');
+
+        allbtn.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                if (button.className == 'btn-cyan') {
+                    mouseevents('cyan');
+                } else if (button.className == 'btn-brown') {
+                    mouseevents('brown');
+                } else if (button.className == 'btn-orange') {
+                    mouseevents('orange');
+                }
+            })
+        })
+
+
+
+        function createdivs(numOfRows, numOfcols) {
+            const grid = document.querySelector('#container');
+            grid.style.setProperty('--grid-rows', numOfRows);
+            grid.style.setProperty('--grid-columns', numOfcols);
+
+            for (let i = 0; i < (numOfRows * numOfcols); i++) {
+                let smallboxes = document.createElement('div');
+                smallboxes.className = "grid-cell";
+                grid.appendChild(smallboxes);
+            }
+
+        }
+
+        function mouseevents(color) {
+            let allcells = document.querySelectorAll('.grid-cell');
+
+            allcells.forEach((div) => {
+
+                div.addEventListener('mouseover', function() {
+                    div.setAttribute('style', 'background: ' + color);
+                    console.log('change color to green');
+                })
+            })
+        }
+        // const buttons = document.querySelectorAll('button');
+
+        // buttons.forEach((button) => {
+
+        //     button.addEventListener('click', (e) => {
+        //         // alert(button.id);
+        //         if (button.id == 1) {
+        //             button.setAttribute('style', 'font-size: 14px; padding: 10px; color: white; background: red; border: 0');
+        //         } else if (button.id == 2) {
+        //             button.setAttribute('style', 'font-size: 14px; padding: 10px; color: white; background: blue; border: 0');
+        //         } else {
+        //             button.setAttribute('style', 'font-size: 14px; padding: 10px; color: white; background: green; border: 0');
+        //         }
+        //     })
+        // })
+    </script>
+</body>
+
+</html>
